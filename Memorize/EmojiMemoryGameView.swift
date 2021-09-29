@@ -40,7 +40,7 @@ struct EmojiMemoryGameView: View {
     
     private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
         var delay = 0.0
-        if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
+        if let index = game.cards.firstIndex(where: { $0.id == card.id } ) {
             delay = Double(index) * (CardConstants.totalDealDuration / Double(game.cards.count))
         }
         return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
@@ -67,7 +67,6 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        
         .foregroundColor(CardConstants.color)
     }
     
@@ -125,7 +124,6 @@ struct CardView: View {
     let card: EmojiMemoryGame.Card
     
     @State private var animatedBonusremaining: Double = 0
-    
     
     var body: some View {
         GeometryReader { geometry in

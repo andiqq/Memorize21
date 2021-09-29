@@ -11,7 +11,7 @@ struct Pie: Shape {
     
     var startAngle: Angle
     var endAngle: Angle
-    var clockwise: Bool = true
+    var clockwise: Bool = false
     
     var animatableData: AnimatablePair<Double, Double> {
         get {
@@ -28,8 +28,8 @@ struct Pie: Shape {
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.width, rect.height) / 2
         let start = CGPoint(
-            x: center.x + radius * cos(startAngle.radians),     // no type conversion necessary here
-            y: center.y + radius * sin(startAngle.radians)
+            x: center.x + radius * CGFloat(cos(startAngle.radians)),     // no type conversion necessary here; but getting error "ambiguous use of cos"
+            y: center.y + radius * CGFloat(sin(startAngle.radians))
         )
         
         var p = Path()
@@ -41,8 +41,9 @@ struct Pie: Shape {
             radius: radius,
             startAngle: startAngle,
             endAngle: endAngle,
-            clockwise: clockwise
+            clockwise: !clockwise
         )
+        p.addLine(to: center)
 
         return p
     }
