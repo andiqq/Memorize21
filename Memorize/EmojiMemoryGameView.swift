@@ -160,10 +160,6 @@ struct CardView: View {
         min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
     }
     
-//    private func font(in size: CGSize) -> Font {
-//        Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
-//    }
-    
     private struct DrawingConstants {
         static let fontScale: CGFloat = 0.7
         static let fontSize: CGFloat = 32
