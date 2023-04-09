@@ -100,10 +100,11 @@ struct EmojiMemoryGameView: View {
     }
     
     var restart: some View {
+        
         Button("Restart") {
+            game.restart()
             withAnimation {
                 dealt = []
-                game.restart()
             }
         }
     }
@@ -130,7 +131,7 @@ struct CardView: View {
             ZStack {
                 Group {
                     if card.isConsumingBonusTime {
-                        Pie(startAngle: Angle(degrees: 0.001-90), endAngle: Angle(degrees: (0.999 - animatedBonusremaining) * 360-90))
+                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: (1 - animatedBonusremaining) * 360 - 90))
                             .onAppear {
                                 animatedBonusremaining = card.bonusRemaining
                                 withAnimation(.linear(duration: card.bonusTimeRemaining)) {
@@ -138,15 +139,16 @@ struct CardView: View {
                                 }
                             }
                     } else {
-                        Pie(startAngle: Angle(degrees: 0.001-90), endAngle: Angle(degrees: (0.999 - card.bonusRemaining) * 360-90))
+                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: ( 1 - card.bonusRemaining ) * 360 - 89.999))
                     }
+                    
                 }
                 .padding(5)
                 .opacity(0.5)
                 Text(card.content)
                     .rotationEffect(.degrees(card.isMatched ? 360 : 0))
-                    
-                    .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
+                    //.animation(.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched )
+                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
                     .padding(5)
                     .font(Font.system(size: DrawingConstants.fontSize))
                     .scaleEffect(scale(thatFits: geometry.size))
