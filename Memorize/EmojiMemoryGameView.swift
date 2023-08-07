@@ -106,6 +106,7 @@ struct EmojiMemoryGameView: View {
             withAnimation {
                 dealt = []
             }
+            
         }
     }
     
@@ -147,8 +148,9 @@ struct CardView: View {
                 .opacity(0.5)
                 Text(card.content)
                     .rotationEffect(.degrees(card.isMatched ? 360 : 0))
-                    //.animation(.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched )
-                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
+
+                   .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
+                //    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
                     .padding(5)
                     .font(Font.system(size: DrawingConstants.fontSize))
                     .scaleEffect(scale(thatFits: geometry.size))
