@@ -132,7 +132,7 @@ struct CardView: View {
             ZStack {
                 Group {
                     if card.isConsumingBonusTime {
-                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: (1 - animatedBonusremaining) * 360 - 90))
+                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: (1 - animatedBonusremaining) * 360 - 89.9))
                             .onAppear {
                                 animatedBonusremaining = card.bonusRemaining
                                 withAnimation(.linear(duration: card.bonusTimeRemaining)) {
@@ -140,7 +140,7 @@ struct CardView: View {
                                 }
                             }
                     } else {
-                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: ( 1 - card.bonusRemaining ) * 360 - 89.999))
+                        Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: ( 1 - card.bonusRemaining ) * 360 - 89.9))
                     }
                     
                 }
@@ -149,8 +149,8 @@ struct CardView: View {
                 Text(card.content)
                     .rotationEffect(.degrees(card.isMatched ? 360 : 0))
 
-                   .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default)
-                //    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
+//                    .animation(card.isMatched ? Animation.linear(duration: 1).repeatForever(autoreverses: false) : .default, value: card.isFaceUp)
+                   .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
                     .padding(5)
                     .font(Font.system(size: DrawingConstants.fontSize))
                     .scaleEffect(scale(thatFits: geometry.size))
